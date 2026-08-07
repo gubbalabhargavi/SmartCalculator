@@ -22,14 +22,19 @@
 ## Functional Requirements
 
 FR1: The calculator shall support +, -, *, /, and % operations.
+
 FR2: The user shall enter two numbers and an operator via the command line.
+
 FR3: The calculator shall run in a loop, accepting new calculations until the user types 'exit'.
+
 FR4: Division by zero shall display a clear error message instead of crashing the program.
+
 FR5: The calculator shall display results formatted to two decimal places.
 
 ## Non-Functional Requirements
 
 NF1: Each calculation shall complete and display its result within 1 second.
+
 NF2: Error messages shall be human-readable, not raw stack traces or exception names.
 
 ## What This Project Will NOT Build
