@@ -2,9 +2,17 @@ package com.savoira;
 
 import java.util.Scanner;
 
+/**
+ * Entry point for the SmartCalculator CLI application.
+ * Handles reading user input and displaying output; all calculation
+ * logic is delegated to the Calculator class.
+ */
 public class Main {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Calculator calculator = new Calculator();
+
         System.out.println("=== SmartCalculator ===");
         System.out.println("Type 'exit' to quit.");
 
@@ -21,24 +29,8 @@ public class Main {
             System.out.print("Enter second number: ");
             double b = Double.parseDouble(sc.nextLine().trim());
 
-            double result = switch (op) {
-                case "+" -> a + b;
-                case "-" -> a - b;
-                case "*" -> a * b;
-                case "/" -> {
-                    if (b == 0) {
-                        System.out.println("Error: division by zero");
-                        yield Double.NaN;
-                    } else {
-                        yield a / b;
-                    }
-                }
-                case "%" -> a % b;
-                default -> {
-                    System.out.println("Unknown operator");
-                    yield Double.NaN;
-                }
-            };
+            Operation operation = new Operation(a, b, op);
+            double result = calculator.calculate(operation);
 
             if (!Double.isNaN(result)) {
                 System.out.printf("Result: %.2f%n", result);
