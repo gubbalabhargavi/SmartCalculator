@@ -1,38 +1,49 @@
 package com.savoira;
 
+import java.util.logging.Logger;
+
 /**
  * Performs calculations for the SmartCalculator application.
  * Contains the core arithmetic logic, separated out from user input handling.
  */
 public class Calculator {
 
+    private static final Logger LOGGER = Logger.getLogger(Calculator.class.getName());
+
     /**
      * Executes the calculation described by the given Operation.
      *
      * @param op the Operation containing the operands and operator
      * @return the result of the calculation, or Double.NaN if the
-     *         operation is invalid (division by zero or unknown operator)
+     *         operation is invalid (division/modulo by zero or unknown operator)
      */
     public double calculate(Operation op) {
-        double a = op.getFirstOperand();
-        double b = op.getSecondOperand();
+        double firstNumber = op.getFirstOperand();
+        double secondNumber = op.getSecondOperand();
         String operator = op.getOperator();
 
         return switch (operator) {
-            case "+" -> a + b;
-            case "-" -> a - b;
-            case "*" -> a * b;
+            case "+" -> firstNumber + secondNumber;
+            case "-" -> firstNumber - secondNumber;
+            case "*" -> firstNumber * secondNumber;
             case "/" -> {
-                if (b == 0) {
-                    System.out.println("Error: division by zero");
+                if (secondNumber == 0) {
+                    LOGGER.severe("Error: division by zero");
                     yield Double.NaN;
                 } else {
-                    yield a / b;
+                    yield firstNumber / secondNumber;
                 }
             }
-            case "%" -> a % b;
+            case "%" -> {
+                if (secondNumber == 0) {
+                    LOGGER.severe("Error: modulo by zero");
+                    yield Double.NaN;
+                } else {
+                    yield firstNumber % secondNumber;
+                }
+            }
             default -> {
-                System.out.println("Unknown operator");
+                LOGGER.severe("Unknown operator: " + operator);
                 yield Double.NaN;
             }
         };
@@ -46,7 +57,7 @@ public class Calculator {
      */
     public static double squareRoot(double n) {
         if (n < 0) {
-            System.out.println("Error: cannot take square root of a negative number");
+            LOGGER.severe("Error: cannot take square root of a negative number");
             return Double.NaN;
         }
         return Math.sqrt(n);
@@ -61,7 +72,7 @@ public class Calculator {
      */
     public static double percentage(double part, double whole) {
         if (whole == 0) {
-            System.out.println("Error: cannot calculate percentage of zero");
+            LOGGER.severe("Error: cannot calculate percentage of zero");
             return Double.NaN;
         }
         return (part / whole) * 100;

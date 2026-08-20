@@ -1,6 +1,7 @@
 package com.savoira;
 
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 /**
  * Entry point for the SmartCalculator CLI application.
@@ -9,34 +10,47 @@ import java.util.Scanner;
  */
 public class Main {
 
+    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Calculator calculator = new Calculator();
 
-        System.out.println("=== SmartCalculator ===");
-        System.out.println("Type 'exit' to quit.");
+        printBanner();
 
         while (true) {
             System.out.print("Enter first number (or 'exit'): ");
             String input = sc.nextLine().trim();
             if (input.equalsIgnoreCase("exit")) break;
 
-            double a = Double.parseDouble(input);
+            double firstNumber = Double.parseDouble(input);
 
             System.out.print("Enter operator (+ - * / %): ");
-            String op = sc.nextLine().trim();
+            String operator = sc.nextLine().trim();
 
             System.out.print("Enter second number: ");
-            double b = Double.parseDouble(sc.nextLine().trim());
+            double secondNumber = Double.parseDouble(sc.nextLine().trim());
 
-            Operation operation = new Operation(a, b, op);
+            Operation operation = new Operation(firstNumber, secondNumber, operator);
             double result = calculator.calculate(operation);
 
             if (!Double.isNaN(result)) {
                 System.out.printf("Result: %.2f%n", result);
             }
+            System.out.println("------------------------------------");
         }
 
-        System.out.println("Goodbye!");
+        LOGGER.info("SmartCalculator session ended. Goodbye!");
+    }
+
+    /**
+     * Prints a decorated banner shown once when the application starts.
+     */
+    private static void printBanner() {
+        System.out.println("======================================");
+        System.out.println("       ===  SmartCalculator  ===       ");
+        System.out.println("======================================");
+        System.out.println("   Type 'exit' at any time to quit.");
+        System.out.println("======================================");
     }
 }
