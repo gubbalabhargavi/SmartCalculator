@@ -18,10 +18,37 @@ public class Main {
 
         printBanner();
 
-        while (true) {
-            System.out.print("Enter first number (or 'exit'): ");
+                while (true) {
+            System.out.print("Enter first number, 'sqrt', 'pct', or 'exit': ");
             String input = sc.nextLine().trim();
-            if (input.equalsIgnoreCase("exit")) break;
+
+            if (input.equalsIgnoreCase("exit")) {
+                break;
+            }
+
+            if (input.equalsIgnoreCase("sqrt")) {
+                System.out.print("Enter number: ");
+                double n = Double.parseDouble(sc.nextLine().trim());
+                double result = Calculator.squareRoot(n);
+                if (!Double.isNaN(result)) {
+                    System.out.printf("Square root: %.2f%n", result);
+                }
+                System.out.println("------------------------------------");
+                continue;
+            }
+
+            if (input.equalsIgnoreCase("pct")) {
+                System.out.print("Enter part value: ");
+                double part = Double.parseDouble(sc.nextLine().trim());
+                System.out.print("Enter whole value: ");
+                double whole = Double.parseDouble(sc.nextLine().trim());
+                double result = Calculator.percentage(part, whole);
+                if (!Double.isNaN(result)) {
+                    System.out.printf("Percentage: %.2f%%%n", result);
+                }
+                System.out.println("------------------------------------");
+                continue;
+            }
 
             double firstNumber = Double.parseDouble(input);
 
