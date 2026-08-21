@@ -3,7 +3,7 @@ package com.savoira.w5;
 /**
  * Represents a personal loan, which uses flat-rate simple interest.
  */
-public class PersonalLoan extends Loan {
+public class PersonalLoan extends Loan implements Exportable {
 
     /**
      * Creates a new PersonalLoan.
@@ -37,5 +37,15 @@ public class PersonalLoan extends Loan {
     @Override
     public String loanType() {
         return "Personal Loan";
+    }
+
+
+    /**
+     * @return this loan's fields as a comma-separated CSV row, including
+     *         the calculated EMI as the final value
+     */
+    @Override
+    public String toCSVRow() {
+        return loanId + "," + applicantName + "," + principal + "," + annualRate + "," + tenureMonths + "," + String.format("%.2f", calculateEMI());
     }
 }
