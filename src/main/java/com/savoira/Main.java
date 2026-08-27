@@ -47,6 +47,10 @@ public class Main {
                 System.out.print("Enter second number: ");
                 double secondNumber = Double.parseDouble(sc.nextLine().trim());
 
+                if (!isValidOperator(operator)) {
+                    throw new InvalidOperationException("Unknown operator: " + operator);
+                }
+
                 Operation operation = new Operation(firstNumber, secondNumber, operator);
                 double result = calculator.calculate(operation);
 
@@ -101,5 +105,16 @@ public class Main {
         System.out.println("======================================");
         System.out.println("   Type 'exit' at any time to quit.");
         System.out.println("======================================");
+    }
+
+
+    /**
+     * Checks whether the given operator is one this calculator supports.
+     *
+     * @param op the operator symbol to check
+     * @return true if op is one of +, -, *, /, %, false otherwise
+     */
+    private static boolean isValidOperator(String op) {
+        return op.equals("+") || op.equals("-") || op.equals("*") || op.equals("/") || op.equals("%");
     }
 }
