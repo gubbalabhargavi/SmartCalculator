@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Meridian Retail Bank - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Meridian Retail Bank</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Accounts</a></li>
+            <li><a href="#">Transfers</a></li>
+            <li><a href="#">Loans</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+    </nav>
+
+    <div class="content-wrapper">
+    <main>
+        <section>
+            <h2>Account Summary</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Account Number</th>
+                        <th scope="col">Account Type</th>
+                        <th scope="col">Balance</th>
+                        <th scope="col">Last Transaction Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ACC-100234</td>
+                        <td>Savings</td>
+                        <td>Rs.45,200.50</td>
+                        <td>2026-09-10</td>
+                    </tr>
+                    <tr>
+                        <td>ACC-100567</td>
+                        <td>Current</td>
+                        <td>Rs.128,900.00</td>
+                        <td>2026-09-08</td>
+                    </tr>
+                    <tr>
+                        <td>ACC-100892</td>
+                        <td>Savings</td>
+                        <td>Rs.5,000.00</td>
+                        <td>2026-07-22</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Account Cards</h2>
+            <div class="card-grid">
+                <article class="card">
+                    <h3>Savings Account</h3>
+                    <p>ACC-100234</p>
+                    <p>Balance: Rs.45,200.50</p>
+                </article>
+                <article class="card">
+                    <h3>Current Account</h3>
+                    <p>ACC-100567</p>
+                    <p>Balance: Rs.128,900.00</p>
+                </article>
+                <article class="card">
+                    <h3>Savings Account</h3>
+                    <p>ACC-100892</p>
+                    <p>Balance: Rs.5,000.00</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <aside>
+        <h2>Quick Transfer</h2>
+        <form>
+            <label for="recipient">Recipient account:</label>
+            <input type="text" id="recipient" name="recipient" required>
+
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" min="500" max="200000" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </aside>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Meridian Retail Bank | Savoira Learning Platform</p>
+        <p><a href="privacy-policy.html">Privacy Policy</a></p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,159 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* D1.1: Nav */
+nav {
+    display: flex;
+    flex-direction: row;
+    background-color: #1F3864;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 16px;
+    display: block;
+}
+
+nav a:hover {
+    background-color: #0F7C7C;
+}
+
+/* Layout wrapper for main + aside */
+.content-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+/* D1.2: Account card grid */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.card {
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    border-left: 5px solid #0F7C7C;
+    background-color: #ffffff;
+}
+
+/* D1.3: Account summary table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #1F3864;
+}
+
+thead th {
+    color: #ffffff;
+    font-weight: bold;
+    padding: 12px;
+    text-align: left;
+}
+
+tbody td {
+    padding: 12px;
+    text-align: left;
+    background-color: #ffffff;
+}
+
+tbody tr:nth-child(even) td {
+    background-color: #EAF1FB;
+}
+
+/* D1.4: Quick Transfer / Loan form styling */
+form input[type="text"],
+form input[type="number"],
+form input[type="email"],
+form input[type="tel"],
+form select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #C0C0C0;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+form input:focus,
+form select:focus {
+    outline: 2px solid #0F7C7C;
+}
+
+form button {
+    background-color: #1F3864;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+form button:hover {
+    background-color: #12254F;
+}
+
+form label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+/* D2.1: Above 900px - main/aside 70/30 split */
+@media (min-width: 901px) {
+    main {
+        flex: 0 0 70%;
+    }
+
+    aside {
+        flex: 0 0 30%;
+    }
+}
+
+/* D2.2: 600px - 900px - card grid drops to 2 columns */
+@media (max-width: 900px) and (min-width: 601px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* D2.3: Below 600px - stack everything, 1 column cards, nav vertical */
+@media (max-width: 600px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    main,
+    aside {
+        flex: 1 1 100%;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        flex-direction: column;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+}
