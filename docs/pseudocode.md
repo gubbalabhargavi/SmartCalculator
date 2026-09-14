@@ -1,8 +1,11 @@
 # Pseudocode - Square Root Operation
 
 FUNCTION squareRoot(number):
+
     IF number < 0 THEN
+    
         THROW InvalidOperationException("Cannot take square root of a negative number")
+        
     END IF
     RETURN Math.sqrt(number)
 END FUNCTION
