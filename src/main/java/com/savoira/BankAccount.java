@@ -11,6 +11,7 @@ public class BankAccount {
     private String holderName;
     private double balance;
     private int transactionCount;
+    private static int totalAccountsCreated = 0;
 
     /**
      * Primary constructor.
@@ -24,6 +25,7 @@ public class BankAccount {
         this.holderName = holderName;
         this.balance = (initialBalance >= 0) ? initialBalance : 0;
         this.transactionCount = 0;
+        totalAccountsCreated++;
     }
 
     /**
@@ -47,6 +49,14 @@ public class BankAccount {
             System.out.println("Invalid deposit: amount must be greater than 0.");
             return;
         }
+        if (amount > BankConfig.MAX_DEPOSIT) {
+            System.out.println("Invalid deposit: amount exceeds maximum allowed deposit of Rs." + BankConfig.MAX_DEPOSIT);
+            return;
+        }
+        if (transactionCount >= BankConfig.MAX_DAILY_TXN) {
+            System.out.println("Invalid deposit: daily transaction limit reached.");
+            return;
+        }
         balance += amount;
         transactionCount++;
         System.out.println("Deposited Rs." + amount + " successfully.");
@@ -64,8 +74,16 @@ public class BankAccount {
             System.out.println("Invalid withdrawal: amount must be greater than 0.");
             return;
         }
+        if (amount > BankConfig.MAX_WITHDRAWAL) {
+            System.out.println("Invalid withdrawal: amount exceeds maximum allowed withdrawal of Rs." + BankConfig.MAX_WITHDRAWAL);
+            return;
+        }
         if (amount > balance) {
             System.out.println("Invalid withdrawal: insufficient balance.");
+            return;
+        }
+        if (transactionCount >= BankConfig.MAX_DAILY_TXN) {
+            System.out.println("Invalid withdrawal: daily transaction limit reached.");
             return;
         }
         balance -= amount;
@@ -99,6 +117,14 @@ public class BankAccount {
      */
     public int getTransactionCount() {
         return transactionCount;
+    }
+
+    /**
+     * @return the total number of BankAccount objects created so far,
+     *         across the entire program (shared by all accounts)
+     */
+    public static int getTotalAccountsCreated() {
+        return totalAccountsCreated;
     }
 
     /**
