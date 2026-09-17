@@ -1,11 +1,12 @@
 package com.savoira.w5;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
- * Demonstrates the Loan class hierarchy and runtime polymorphism by
- * storing different loan types in a single List<Loan> and printing
- * each one through the same shared loop.
+ * Demonstrates the Loan class hierarchy, interfaces (Auditable, Exportable),
+ * and the equals/hashCode contract.
  */
 public class LoanDemo {
 
@@ -19,11 +20,25 @@ public class LoanDemo {
 
         System.out.println("----- Loan Portfolio Summary -----");
         for (Loan loan : loans) {
-            // Even though the variable is declared as type Loan, calling
-            // printSummary() here triggers HomeLoan's or PersonalLoan's
-            // own calculateEMI() and loanType(), decided at runtime based
-            // on the actual object - this is runtime polymorphism.
             loan.printSummary();
         }
+
+        System.out.println();
+        System.out.println("----- Auditable demo -----");
+        Auditable auditableLoan = new HomeLoan("HL-1001", "Rahul Sharma", 3500000, 8.5, 240);
+        System.out.println(auditableLoan.auditSummary());
+
+        System.out.println();
+        System.out.println("----- Exportable demo -----");
+        Exportable exportableLoan = new PersonalLoan("PL-2001", "Anita Desai", 200000, 12.0, 24);
+        System.out.println(exportableLoan.toCSVRow());
+
+        System.out.println();
+        System.out.println("----- equals() and hashCode() demo -----");
+        Set<Loan> loanSet = new HashSet<>();
+        loanSet.add(new HomeLoan("HL-9000", "Test Applicant", 1000000, 9.0, 120));
+        loanSet.add(new HomeLoan("hl-9000", "Test Applicant", 1000000, 9.0, 120));
+        System.out.println("Added two HomeLoans with the same loanId (different case).");
+        System.out.println("HashSet size (should be 1): " + loanSet.size());
     }
 }

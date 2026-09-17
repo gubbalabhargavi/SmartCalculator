@@ -3,7 +3,7 @@ package com.savoira.w5;
 /**
  * Represents a home loan, which uses the standard compound EMI formula.
  */
-public class HomeLoan extends Loan {
+public class HomeLoan extends Loan implements Auditable {
 
     /**
      * Creates a new HomeLoan.
@@ -39,5 +39,14 @@ public class HomeLoan extends Loan {
     @Override
     public String loanType() {
         return "Home Loan";
+    }
+
+    
+    /**
+     * @return an audit-formatted summary of this home loan
+     */
+    @Override
+    public String auditSummary() {
+        return auditPrefix() + loanId + " | " + applicantName + " | Rs." + principal + " | Rate:" + annualRate + "%";
     }
 }

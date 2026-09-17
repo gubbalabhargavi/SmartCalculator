@@ -52,4 +52,38 @@ public abstract class Loan {
                 "[%s] %s | Applicant: %s | Principal: %.2f | Rate: %.2f%% | Tenure: %d months | EMI: %.2f%n",
                 loanType(), loanId, applicantName, principal, annualRate, tenureMonths, calculateEMI());
     }
+
+
+    /**
+     * Two loans are considered equal if and only if their loanId matches,
+     * ignoring case. This means different loan types (e.g. a HomeLoan and
+     * a PersonalLoan) could be treated as equal if they share the same ID,
+     * since equality is based purely on identity via loanId.
+     *
+     * @param obj the object to compare against
+     * @return true if obj is a Loan with the same loanId (case-insensitive)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Loan)) {
+            return false;
+        }
+        Loan other = (Loan) obj;
+        return this.loanId != null && this.loanId.equalsIgnoreCase(other.loanId);
+    }
+
+    /**
+     * Generates a hash code consistent with equals() - based only on the
+     * lowercase form of loanId, so two loans considered equal always
+     * produce the same hash code (required by the equals/hashCode contract).
+     *
+     * @return the hash code for this loan
+     */
+    @Override
+    public int hashCode() {
+        return loanId == null ? 0 : loanId.toLowerCase().hashCode();
+    }
 }
